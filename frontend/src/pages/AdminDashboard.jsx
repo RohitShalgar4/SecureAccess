@@ -133,7 +133,7 @@ const AdminDashboard = ({ user, onNavigate, onLogout }) => {
               </div>
               <button
                 onClick={onLogout}
-                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
               >
                 Logout
               </button>
@@ -155,7 +155,7 @@ const AdminDashboard = ({ user, onNavigate, onLogout }) => {
         <div className="bg-white shadow-sm rounded-lg overflow-hidden">
           {loading ? (
             <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
             </div>
           ) : (
             <>
@@ -273,7 +273,7 @@ const AdminDashboard = ({ user, onNavigate, onLogout }) => {
                           onClick={() => setCurrentPage(index + 1)}
                           className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                             currentPage === index + 1
-                              ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+                              ? 'z-10 bg-purple-50 border-purple-500 text-purple-600'
                               : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
                           }`}
                         >

@@ -125,7 +125,7 @@ const Signup = ({ onSignup, onNavigateToLogin }) => {
                   onChange={handleChange}
                   className={`appearance-none block w-full px-3 py-2 border ${
                     errors.fullName ? 'border-red-300' : 'border-gray-300'
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                   placeholder="John Doe"
                 />
               </div>
@@ -148,7 +148,7 @@ const Signup = ({ onSignup, onNavigateToLogin }) => {
                   onChange={handleChange}
                   className={`appearance-none block w-full px-3 py-2 border ${
                     errors.email ? 'border-red-300' : 'border-gray-300'
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                   placeholder="you@example.com"
                 />
               </div>
@@ -172,7 +172,7 @@ const Signup = ({ onSignup, onNavigateToLogin }) => {
                   onFocus={() => setShowPasswordHints(true)}
                   className={`appearance-none block w-full px-3 py-2 border ${
                     errors.password ? 'border-red-300' : 'border-gray-300'
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                   placeholder="••••••••"
                 />
               </div>
@@ -205,7 +205,7 @@ const Signup = ({ onSignup, onNavigateToLogin }) => {
                   onChange={handleChange}
                   className={`appearance-none block w-full px-3 py-2 border ${
                     errors.confirmPassword ? 'border-red-300' : 'border-gray-300'
-                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
+                  } rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm`}
                   placeholder="••••••••"
                 />
               </div>
@@ -218,7 +218,7 @@ const Signup = ({ onSignup, onNavigateToLogin }) => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'Creating account...' : 'Create account'}
               </button>
@@ -233,7 +233,7 @@ const Signup = ({ onSignup, onNavigateToLogin }) => {
                   <button
                     type="button"
                     onClick={onNavigateToLogin}
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                    className="font-medium text-purple-600 hover:text-purple-500"
                   >
                     Sign in
                   </button>
