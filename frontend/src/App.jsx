@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
-import AdminDashboard from './pages/AdminDashboard';
+import UserProfile from './pages/UserProfile';
 import { authAPI } from './services/api';
 
 function App() {
@@ -11,22 +11,24 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const token = localStorage.getItem('token');
-      if (token) {
-        try {
-          const response = await authAPI.getCurrentUser();
-          setUser(response.data.user);
-          setCurrentPage('dashboard');
-        } catch (error) {
-          localStorage.removeItem('token');
-        }
-      }
-      setLoading(false);
-    };
-
     checkAuth();
   }, []);
+
+  const checkAuth = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const response = await authAPI.getCurrentUser();
+        setUser(response.data.user);
+        setCurrentPage('dashboard');
+      } catch (error) {
+        localStorage.removeItem('token');
+        setUser(null);
+        setCurrentPage('login');
+      }
+    }
+    setLoading(false);
+  };
 
   const handleLogin = async (email, password) => {
     const response = await authAPI.login(email, password);
@@ -53,6 +55,26 @@ function App() {
     setCurrentPage('login');
   };
 
+  const handleNavigate = (page) => {
+    // Protected routes - check authentication
+    if (!user) {
+      setCurrentPage('login');
+      return;
+    }
+
+    setCurrentPage(page);
+  };
+
+  const handleUserUpdate = async () => {
+    // Refresh user data after profile update
+    try {
+      const response = await authAPI.getCurrentUser();
+      setUser(response.data.user);
+    } catch (error) {
+      console.error('Failed to refresh user data:', error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -64,6 +86,7 @@ function App() {
     );
   }
 
+  // Public routes
   if (currentPage === 'login') {
     return (
       <Login
@@ -82,23 +105,37 @@ function App() {
     );
   }
 
+  // Protected routes - require authentication
+  if (!user) {
+    return (
+      <Login
+        onLogin={handleLogin}
+        onNavigateToSignup={() => setCurrentPage('signup')}
+      />
+    );
+  }
+
+  // Dashboard
   if (currentPage === 'dashboard') {
-    // Show AdminDashboard for admin/manager, regular Dashboard for users
-    if (user?.role === 'admin' || user?.role === 'manager') {
-      return (
-        <AdminDashboard
-          user={user}
-          onLogout={handleLogout}
-        />
-      );
-    } else {
-      return (
-        <Dashboard
-          user={user}
-          onLogout={handleLogout}
-        />
-      );
-    }
+    return (
+      <Dashboard
+        user={user}
+        onNavigate={handleNavigate}
+        onLogout={handleLogout}
+      />
+    );
+  }
+
+  // User Profile
+  if (currentPage === 'profile') {
+    return (
+      <UserProfile
+        user={user}
+        onNavigate={handleNavigate}
+        onLogout={handleLogout}
+        onUserUpdate={handleUserUpdate}
+      />
+    );
   }
 
   return null;

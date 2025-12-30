@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { userAPI } from '../services/api';
 import Toast from '../components/Toast';
 import ConfirmDialog from '../components/ConfirmDialog';
+import Navbar from '../components/Navbar';
 
-const AdminDashboard = ({ user, onLogout }) => {
+const AdminDashboard = ({ user, onNavigate, onLogout }) => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [toast, setToast] = useState(null);

@@ -74,5 +74,30 @@ export const userAPI = {
       headers: getAuthHeaders()
     });
     return handleResponse(response);
+  },
+
+  getMyProfile: async () => {
+    const response = await fetch(`${API_URL}/users/profile/me`, {
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  updateMyProfile: async (data) => {
+    const response = await fetch(`${API_URL}/users/profile/update`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data)
+    });
+    return handleResponse(response);
+  },
+
+  changePassword: async (data) => {
+    const response = await fetch(`${API_URL}/users/profile/change-password`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(data)
+    });
+    return handleResponse(response);
   }
 };
