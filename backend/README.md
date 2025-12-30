@@ -22,6 +22,11 @@
 - ✅ Activate user accounts
 - ✅ Deactivate user accounts
 
+### User Management - User Functions
+- ✅ View own profile information
+- ✅ Update full name and email
+- ✅ Change password with current password verification
+
 ## Quick Start
 
 1. **Install dependencies:**
@@ -90,6 +95,13 @@ backend/
 | PUT | `/api/users/:id/activate` | Admin | Activate user account |
 | PUT | `/api/users/:id/deactivate` | Admin | Deactivate user account |
 
+### User Profile (Any Authenticated User)
+| Method | Endpoint | Access | Description |
+|--------|----------|--------|-------------|
+| GET | `/api/users/profile/me` | Private | Get own profile |
+| PUT | `/api/users/profile/update` | Private | Update name/email |
+| PUT | `/api/users/profile/change-password` | Private | Change password |
+
 ### System
 | Method | Endpoint | Access | Description |
 |--------|----------|--------|-------------|
@@ -99,7 +111,8 @@ backend/
 
 See documentation for detailed testing:
 - `API_TESTING.md` - Authentication endpoints
-- `USER_MANAGEMENT_API.md` - User management endpoints
+- `USER_MANAGEMENT_API.md` - Admin user management endpoints
+- `USER_PROFILE_API.md` - User profile management endpoints
 
 Quick test:
 ```bash
@@ -111,9 +124,15 @@ curl -X POST http://localhost:8080/api/auth/signup ^
   -H "Content-Type: application/json" ^
   -d "{\"fullName\":\"John Doe\",\"email\":\"john@example.com\",\"password\":\"SecurePass123!\"}"
 
-# Get all users (requires admin token)
-curl http://localhost:8080/api/users ^
-  -H "Authorization: Bearer YOUR_ADMIN_TOKEN"
+# Get your profile
+curl http://localhost:8080/api/users/profile/me ^
+  -H "Authorization: Bearer YOUR_TOKEN"
+
+# Update your profile
+curl -X PUT http://localhost:8080/api/users/profile/update ^
+  -H "Authorization: Bearer YOUR_TOKEN" ^
+  -H "Content-Type: application/json" ^
+  -d "{\"fullName\":\"John Updated\"}"
 ```
 
 ### Creating an Admin User

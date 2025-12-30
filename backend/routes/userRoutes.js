@@ -3,7 +3,10 @@ import {
   getAllUsers,
   getUserById,
   activateUser,
-  deactivateUser
+  deactivateUser,
+  getMyProfile,
+  updateMyProfile,
+  changeMyPassword
 } from '../controllers/userController.js';
 import { protect } from '../middleware/auth.js';
 import { authorize } from '../middleware/authorize.js';
@@ -12,6 +15,11 @@ const router = express.Router();
 
 // All routes require authentication
 router.use(protect);
+
+// User profile routes (any authenticated user)
+router.get('/profile/me', getMyProfile);
+router.put('/profile/update', updateMyProfile);
+router.put('/profile/change-password', changeMyPassword);
 
 // Admin only routes
 router.get('/', authorize('admin'), getAllUsers);
