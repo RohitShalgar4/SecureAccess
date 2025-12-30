@@ -181,7 +181,7 @@ export const logout = async (req, res) => {
   try {
     // In a JWT-based system, logout is handled client-side by removing the token
     // This endpoint can be used for logging purposes or token blacklisting if needed
-    
+
     res.status(200).json({
       success: true,
       message: 'Logout successful'
