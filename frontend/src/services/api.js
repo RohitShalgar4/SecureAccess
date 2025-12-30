@@ -50,3 +50,29 @@ export const authAPI = {
     return handleResponse(response);
   }
 };
+
+export const userAPI = {
+  getAllUsers: async (params = {}) => {
+    const queryString = new URLSearchParams(params).toString();
+    const response = await fetch(`${API_URL}/users?${queryString}`, {
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  activateUser: async (userId) => {
+    const response = await fetch(`${API_URL}/users/${userId}/activate`, {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  },
+
+  deactivateUser: async (userId) => {
+    const response = await fetch(`${API_URL}/users/${userId}/deactivate`, {
+      method: 'PUT',
+      headers: getAuthHeaders()
+    });
+    return handleResponse(response);
+  }
+};

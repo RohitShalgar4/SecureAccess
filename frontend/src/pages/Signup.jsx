@@ -101,7 +101,7 @@ const Signup = ({ onSignup, onNavigateToLogin }) => {
 
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="text-center text-3xl font-extrabold text-gray-900">
-          Purple Merit Technologies
+          SecureAccess
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Create your account

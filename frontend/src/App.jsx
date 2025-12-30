@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import AdminDashboard from './pages/AdminDashboard';
 import { authAPI } from './services/api';
 
 function App() {
-  const [currentPage, setCurrentPage] = useState('login'); // 'login', 'signup', 'dashboard'
+  const [currentPage, setCurrentPage] = useState('login');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Check if user is already logged in
   useEffect(() => {
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
@@ -55,10 +55,10 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-100 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-slate-900 border-r-transparent"></div>
-          <p className="mt-4 text-slate-600">Loading...</p>
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-indigo-600 border-r-transparent"></div>
+          <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>
     );
@@ -83,12 +83,22 @@ function App() {
   }
 
   if (currentPage === 'dashboard') {
-    return (
-      <Dashboard
-        user={user}
-        onLogout={handleLogout}
-      />
-    );
+    // Show AdminDashboard for admin/manager, regular Dashboard for users
+    if (user?.role === 'admin' || user?.role === 'manager') {
+      return (
+        <AdminDashboard
+          user={user}
+          onLogout={handleLogout}
+        />
+      );
+    } else {
+      return (
+        <Dashboard
+          user={user}
+          onLogout={handleLogout}
+        />
+      );
+    }
   }
 
   return null;
