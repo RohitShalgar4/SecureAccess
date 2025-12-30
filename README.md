@@ -60,8 +60,8 @@ This system is designed for organizations that need to:
 
 1. **Clone the repository**
 ```bash
-git clone <repository-url>
-cd user-management-system
+git clone https://github.com/RohitShalgar4/SecureAccess.git
+cd SecureAccess
 ```
 
 2. **Navigate to backend directory**
@@ -143,142 +143,11 @@ JWT_EXPIRES_IN=7d
 # Node Environment
 NODE_ENV=development
 ```
+Create a `.env` file in the `frontend` directory with the following variables:
 
-### Frontend
-
-No environment variables required for frontend. API URL is configured in `frontend/src/services/api.js`
-
-To change the backend API URL, edit:
-```javascript
-// frontend/src/services/api.js
-const API_URL = 'http://localhost:8080/api';
+```env
+VITE_API_URL=http://localhost:8080/api;
 ```
-
----
-
-## 📦 Deployment Instructions
-
-### Backend Deployment
-
-#### Option 1: Deploy to Heroku
-
-1. **Install Heroku CLI**
-```bash
-npm install -g heroku
-```
-
-2. **Login to Heroku**
-```bash
-heroku login
-```
-
-3. **Create Heroku app**
-```bash
-cd backend
-heroku create your-app-name
-```
-
-4. **Set environment variables**
-```bash
-heroku config:set PORT=8080
-heroku config:set MONGO_URI=your-mongodb-atlas-uri
-heroku config:set JWT_SECRET=your-secret-key
-heroku config:set JWT_EXPIRES_IN=7d
-```
-
-5. **Deploy**
-```bash
-git push heroku main
-```
-
-#### Option 2: Deploy to Railway
-
-1. **Install Railway CLI**
-```bash
-npm install -g @railway/cli
-```
-
-2. **Login and deploy**
-```bash
-railway login
-railway init
-railway up
-```
-
-3. **Set environment variables in Railway dashboard**
-
-#### Option 3: Deploy to VPS (Ubuntu)
-
-1. **Install Node.js and MongoDB**
-```bash
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs mongodb
-```
-
-2. **Clone and setup**
-```bash
-git clone <repository-url>
-cd backend
-npm install
-```
-
-3. **Setup PM2 for process management**
-```bash
-npm install -g pm2
-pm2 start index.js --name user-management-backend
-pm2 startup
-pm2 save
-```
-
-4. **Setup Nginx as reverse proxy**
-```bash
-sudo apt install nginx
-# Configure nginx to proxy to localhost:8080
-```
-
-### Frontend Deployment
-
-#### Option 1: Deploy to Vercel
-
-1. **Install Vercel CLI**
-```bash
-npm install -g vercel
-```
-
-2. **Deploy**
-```bash
-cd frontend
-vercel
-```
-
-3. **Update API URL in production**
-Edit `frontend/src/services/api.js` to use production backend URL
-
-#### Option 2: Deploy to Netlify
-
-1. **Build the project**
-```bash
-cd frontend
-npm run build
-```
-
-2. **Deploy via Netlify CLI**
-```bash
-npm install -g netlify-cli
-netlify deploy --prod --dir=dist
-```
-
-#### Option 3: Deploy to Static Hosting
-
-1. **Build the project**
-```bash
-npm run build
-```
-
-2. **Upload the `dist` folder to your hosting provider**
-- AWS S3 + CloudFront
-- GitHub Pages
-- Firebase Hosting
 
 ---
 
@@ -770,22 +639,25 @@ curl http://localhost:8080/api/auth/me \
 
 ## 👥 User Roles & Permissions
 
-### User
+### User (Demo: user@gmail.com / User@123)
+
 - View own profile
+
 - Update own profile
+
 - Change own password
+
 - Access dashboard
 
-### Manager
-- All User permissions
-- View all users
-- Activate/deactivate users
-- Access user management
+### Admin (Demo: admin@gmail.com / Admin@123)
 
-### Admin
 - All Manager permissions
+
 - Full system access
+
 - Manage all user accounts
+
+- Activate/deactivate any user
 
 ---
 
@@ -820,12 +692,6 @@ SecureAccess
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
----
-
-## 📞 Support
-
-For support, email support@purplemerit.com or open an issue in the repository.
 
 ---
 
